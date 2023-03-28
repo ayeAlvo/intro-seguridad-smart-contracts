@@ -1,4 +1,5 @@
 pragma solidity ^0.6.0;
+// sin SafeMath
 
 contract Token {
 
@@ -16,6 +17,7 @@ contract Token {
         require(balances[msg.sender] - amount >= 0, "No tiene suficientes tokens");
         
         balances[msg.sender] -= amount;
+        // balances[msg.sender] = balances[msg.sender] - amount;        
         balances[to] += amount;
 
         emit Transfer(msg.sender, to, amount);
